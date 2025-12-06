@@ -1,0 +1,307 @@
+{
+  "courses": [
+    {
+      "id": 1,
+      "name": "Computer Architecture",
+      "description": "컴퓨터 구조의 기본 개념과 MIPS 프로세서 학습",
+      "progress": 65,
+      "completedLessons": 12,
+      "inProgressLessons": 5,
+      "totalLessons": 20,
+      "createdAt": "2024-09-01"
+    },
+    {
+      "id": 2,
+      "name": "Discrete Mathematics",
+      "description": "이산수학의 기초 개념과 증명 방법 학습",
+      "progress": 80,
+      "completedLessons": 16,
+      "inProgressLessons": 2,
+      "totalLessons": 18,
+      "createdAt": "2024-09-01"
+    },
+    {
+      "id": 3,
+      "name": "Church History",
+      "description": "초기 교회사와 교부들의 저작 연구",
+      "progress": 45,
+      "completedLessons": 5,
+      "inProgressLessons": 3,
+      "totalLessons": 12,
+      "createdAt": "2024-09-01"
+    },
+    {
+      "id": 4,
+      "name": "Open Source Studio",
+      "description": "오픈소스 프로젝트 개발 및 Git 워크플로우",
+      "progress": 55,
+      "completedLessons": 8,
+      "inProgressLessons": 4,
+      "totalLessons": 15,
+      "createdAt": "2024-09-01"
+    },
+    {
+      "id": 5,
+      "name": "Web Development",
+      "description": "React, Node.js, 데이터베이스 통합 학습",
+      "progress": 70,
+      "completedLessons": 14,
+      "inProgressLessons": 3,
+      "totalLessons": 20,
+      "createdAt": "2024-09-01"
+    }
+  ],
+  "lessons": [
+    {
+      "id": 1,
+      "courseId": 1,
+      "title": "Chapter 1: Introduction",
+      "description": "컴퓨터 구조의 기본 개념과 역사를 학습합니다.",
+      "status": "completed",
+      "order": 1,
+      "dueDate": "2024-09-15",
+      "completedDate": "2024-09-14",
+      "notes": "기본 개념 이해 완료"
+    },
+    {
+      "id": 2,
+      "courseId": 1,
+      "title": "Chapter 2: MIPS Architecture",
+      "description": "MIPS 프로세서의 구조와 명령어 세트를 이해합니다.",
+      "status": "completed",
+      "order": 2,
+      "dueDate": "2024-09-22",
+      "completedDate": "2024-09-21",
+      "notes": "MIPS 명령어 세트 정리"
+    },
+    {
+      "id": 3,
+      "courseId": 1,
+      "title": "Chapter 3: Instruction Formats",
+      "description": "다양한 명령어 형식과 인코딩 방법을 학습합니다.",
+      "status": "in-progress",
+      "order": 3,
+      "dueDate": "2024-09-29",
+      "completedDate": null,
+      "notes": "R-type, I-type, J-type 형식 학습 중"
+    },
+    {
+      "id": 4,
+      "courseId": 1,
+      "title": "Chapter 4: Assembly Programming",
+      "description": "어셈블리 프로그래밍 기초와 실습을 진행합니다.",
+      "status": "in-progress",
+      "order": 4,
+      "dueDate": "2024-10-06",
+      "completedDate": null,
+      "notes": "간단한 프로그램 작성 연습 중"
+    },
+    {
+      "id": 5,
+      "courseId": 1,
+      "title": "Chapter 5: Pipeline Design",
+      "description": "파이프라인 구조와 성능 최적화를 다룹니다.",
+      "status": "not-started",
+      "order": 5,
+      "dueDate": "2024-10-13",
+      "completedDate": null,
+      "notes": ""
+    },
+    {
+      "id": 6,
+      "courseId": 1,
+      "title": "Chapter 6: Memory Hierarchy",
+      "description": "캐시와 메모리 계층 구조를 학습합니다.",
+      "status": "not-started",
+      "order": 6,
+      "dueDate": "2024-10-20",
+      "completedDate": null,
+      "notes": ""
+    },
+    {
+      "id": 7,
+      "courseId": 2,
+      "title": "Set Theory",
+      "description": "집합론의 기본 개념과 연산을 학습합니다.",
+      "status": "completed",
+      "order": 1,
+      "dueDate": "2024-09-10",
+      "completedDate": "2024-09-09",
+      "notes": "집합 연산 완벽 이해"
+    },
+    {
+      "id": 8,
+      "courseId": 2,
+      "title": "Logic and Proofs",
+      "description": "논리학과 증명 방법을 다룹니다.",
+      "status": "completed",
+      "order": 2,
+      "dueDate": "2024-09-17",
+      "completedDate": "2024-09-16",
+      "notes": "귀납법과 귀류법 정리"
+    },
+    {
+      "id": 9,
+      "courseId": 2,
+      "title": "Counting Principles",
+      "description": "순열, 조합, 이항정리를 학습합니다.",
+      "status": "in-progress",
+      "order": 3,
+      "dueDate": "2024-09-24",
+      "completedDate": null,
+      "notes": "조합 문제 연습 중"
+    },
+    {
+      "id": 10,
+      "courseId": 3,
+      "title": "Early Church Fathers",
+      "description": "초기 교부들의 생애와 사상을 연구합니다.",
+      "status": "completed",
+      "order": 1,
+      "dueDate": "2024-09-12",
+      "completedDate": "2024-09-11",
+      "notes": "아타나시우스의 생애 정리"
+    },
+    {
+      "id": 11,
+      "courseId": 3,
+      "title": "Life of Antony Analysis",
+      "description": "아타나시우스의 '안토니우스의 생애' 분석",
+      "status": "in-progress",
+      "order": 2,
+      "dueDate": "2024-09-26",
+      "completedDate": null,
+      "notes": "레포트 작성 중"
+    },
+    {
+      "id": 12,
+      "courseId": 4,
+      "title": "Git Workflow",
+      "description": "Git의 기본 사용법과 협업 워크플로우를 학습합니다.",
+      "status": "completed",
+      "order": 1,
+      "dueDate": "2024-09-08",
+      "completedDate": "2024-09-07",
+      "notes": "브랜치 전략 이해"
+    },
+    {
+      "id": 13,
+      "courseId": 4,
+      "title": "Open Source Contribution",
+      "description": "오픈소스 프로젝트에 기여하는 방법을 실습합니다.",
+      "status": "in-progress",
+      "order": 2,
+      "dueDate": "2024-09-22",
+      "completedDate": null,
+      "notes": "첫 PR 준비 중"
+    },
+    {
+      "id": 14,
+      "courseId": 5,
+      "title": "React CRUD Application",
+      "description": "React로 CRUD 기능을 구현합니다.",
+      "status": "in-progress",
+      "order": 1,
+      "dueDate": "2024-09-25",
+      "completedDate": null,
+      "notes": "json-server 연동 중"
+    },
+    {
+      "id": 15,
+      "courseId": 5,
+      "title": "Database Integration",
+      "description": "MySQL과 PHP를 이용한 데이터베이스 통합을 학습합니다.",
+      "status": "in-progress",
+      "order": 2,
+      "dueDate": "2024-10-02",
+      "completedDate": null,
+      "notes": "XAMPP 환경 설정 완료"
+    }
+  ],
+  "assignments": [
+    {
+      "id": 1,
+      "courseId": 1,
+      "title": "MIPS Assembly Programming Project",
+      "description": "간단한 계산기를 MIPS 어셈블리로 구현하기",
+      "dueDate": "2024-10-15",
+      "status": "in-progress",
+      "score": null,
+      "maxScore": 100,
+      "submittedDate": null
+    },
+    {
+      "id": 2,
+      "courseId": 2,
+      "title": "Mathematical Induction Proof",
+      "description": "귀납법을 이용한 증명 문제 5개",
+      "dueDate": "2024-09-28",
+      "status": "not-started",
+      "score": null,
+      "maxScore": 100,
+      "submittedDate": null
+    },
+    {
+      "id": 3,
+      "courseId": 3,
+      "title": "Church History Essay",
+      "description": "아타나시우스의 '안토니우스의 생애' 분석 레포트",
+      "dueDate": "2024-09-30",
+      "status": "in-progress",
+      "score": null,
+      "maxScore": 100,
+      "submittedDate": null
+    },
+    {
+      "id": 4,
+      "courseId": 4,
+      "title": "Open Source Contribution",
+      "description": "실제 오픈소스 프로젝트에 기여하기",
+      "dueDate": "2024-10-20",
+      "status": "not-started",
+      "score": null,
+      "maxScore": 100,
+      "submittedDate": null
+    },
+    {
+      "id": 5,
+      "courseId": 5,
+      "title": "React CRUD App Deployment",
+      "description": "완성된 CRUD 앱을 Netlify에 배포하기",
+      "dueDate": "2024-09-27",
+      "status": "in-progress",
+      "score": null,
+      "maxScore": 100,
+      "submittedDate": null
+    }
+  ],
+  "studyLogs": [
+    {
+      "id": 1,
+      "courseId": 1,
+      "lessonId": 3,
+      "date": "2024-09-23",
+      "duration": 120,
+      "notes": "Instruction Format 복습, R-type 완벽 이해",
+      "difficulty": "medium"
+    },
+    {
+      "id": 2,
+      "courseId": 2,
+      "lessonId": 9,
+      "date": "2024-09-23",
+      "duration": 90,
+      "notes": "조합 문제 10개 풀이",
+      "difficulty": "hard"
+    },
+    {
+      "id": 3,
+      "courseId": 5,
+      "lessonId": 14,
+      "date": "2024-09-24",
+      "duration": 150,
+      "notes": "json-server CRUD 구현 완료",
+      "difficulty": "medium"
+    }
+  ]
+}
