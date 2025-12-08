@@ -16,8 +16,8 @@ function LessonDetail() {
 
   const fetchLessonDetail = async () => {
     try {
-      const lessonResponse = await axios.get(`http://localhost:3001/lessons/${lessonId}`);
-      const courseResponse = await axios.get(`http://localhost:3001/courses/${courseId}`);
+      const lessonResponse = await axios.get(`https://ossdb.onrender.com/lessons/${lessonId}`);
+      const courseResponse = await axios.get(`https://ossdb.onrender.com/courses/${courseId}`);
       
       setLesson(lessonResponse.data);
       setCourse(courseResponse.data);
@@ -31,7 +31,7 @@ function LessonDetail() {
   const handleDelete = async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
-        await axios.delete(`http://localhost:3001/lessons/${lessonId}`);
+        await axios.delete(`https://ossdb.onrender.com/lessons/${lessonId}`);
         navigate(`/course/${courseId}/lessons`);
       } catch (error) {
         console.error('삭제 실패:', error);

@@ -26,7 +26,7 @@ function AssignmentForm() {
 
   const fetchAssignment = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/assignments/${assignmentId}`);
+      const response = await axios.get(`https://ossdb.onrender.com/assignments/${assignmentId}`);
       setFormData({
         ...response.data,
         score: response.data.score !== null ? response.data.score : '',
@@ -60,9 +60,9 @@ function AssignmentForm() {
       };
 
       if (isEditMode) {
-        await axios.put(`http://localhost:3001/assignments/${assignmentId}`, assignmentData);
+        await axios.put(`https://ossdb.onrender.com/assignments/${assignmentId}`, assignmentData);
       } else {
-        await axios.post('http://localhost:3001/assignments', assignmentData);
+        await axios.post('https://ossdb.onrender.com/assignments', assignmentData);
       }
       
       navigate(`/course/${courseId}/assignments`);

@@ -8,6 +8,8 @@ function Home() {
   const [loading, setLoading] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [editingCourse, setEditingCourse] = useState(null);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [quote, setQuote] = useState(null);
   const [formData, setFormData] = useState({
     name: '',
     description: '',
@@ -19,11 +21,34 @@ function Home() {
 
   useEffect(() => {
     fetchCourses();
+    fetchQuote();
   }, []);
+
+  const fetchQuote = async () => {
+    try {
+      // Quotable API 사용 (무료, 키 불필요) - 영어 명언
+      const response = await axios.get('https://api.quotable.io/random');
+      setQuote(response.data);
+      console.log('새 명언 로드:', response.data); // 디버깅용
+    } catch (error) {
+      console.error('명언을 불러오는데 실패했습니다:', error);
+      // 실패 시 기본 명언들 중 랜덤 선택
+      const fallbackQuotes = [
+        { content: 'Success is the sum of small efforts repeated day in and day out.', author: 'Robert Collier' },
+        { content: 'The only way to do great work is to love what you do.', author: 'Steve Jobs' },
+        { content: 'Believe you can and you\'re halfway there.', author: 'Theodore Roosevelt' },
+        { content: '성공은 매일의 작은 노력이 만들어냅니다.', author: '익명' },
+        { content: '배움에는 끝이 없고, 시작도 늦지 않다.', author: '한국 속담' },
+        { content: '천 리 길도 한 걸음부터', author: '한국 속담' }
+      ];
+      const randomQuote = fallbackQuotes[Math.floor(Math.random() * fallbackQuotes.length)];
+      setQuote(randomQuote);
+    }
+  };
 
   const fetchCourses = async () => {
     try {
-      const response = await axios.get('http://localhost:3001/courses');
+      const response = await axios.get('https://ossdb.onrender.com/courses');
       setCourses(response.data);
       setLoading(false);
     } catch (error) {
@@ -64,7 +89,7 @@ function Home() {
     try {
       if (editingCourse) {
         // 수정
-        const response = await axios.put(`http://localhost:3001/courses/${editingCourse.id}`, formData);
+        const response = await axios.put(`https://ossdb.onrender.com/courses/${editingCourse.id}`, formData);
         setCourses(courses.map(c => c.id === editingCourse.id ? response.data : c));
       } else {
         // 추가
@@ -72,7 +97,7 @@ function Home() {
           ...formData,
           createdAt: new Date().toISOString().split('T')[0]
         };
-        const response = await axios.post('http://localhost:3001/courses', newCourse);
+        const response = await axios.post('https://ossdb.onrender.com/courses', newCourse);
         setCourses([...courses, response.data]);
       }
       
@@ -96,7 +121,7 @@ function Home() {
   const handleDelete = async (courseId) => {
     if (window.confirm('이 과목을 삭제하시겠습니까? 관련된 모든 강의도 삭제됩니다.')) {
       try {
-        await axios.delete(`http://localhost:3001/courses/${courseId}`);
+        await axios.delete(`https://ossdb.onrender.com/courses/${courseId}`);
         setCourses(courses.filter(course => course.id !== courseId));
       } catch (error) {
         console.error('과목 삭제 실패:', error);
@@ -109,11 +134,16 @@ function Home() {
     return <div className="loading">로딩 중...</div>;
   }
 
+  // 검색 필터링
+  const filteredCourses = courses.filter(course =>
+    course.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="home-container">
       <div className="container">
         <header className="page-header">
-          <div>
+          <div className="header-content">
             <h1>📚 내 과목</h1>
             <p className="header-info">오늘도 성장하는 하루 되세요!</p>
           </div>
@@ -122,8 +152,50 @@ function Home() {
           </button>
         </header>
 
+        {/* 명언 섹션 */}
+        {quote && (
+          <div className="quote-section">
+            <div className="quote-content">
+              <p className="quote-text">💡 "{quote.content}"</p>
+              <p className="quote-author">- {quote.author}</p>
+            </div>
+            <button 
+              className="refresh-quote" 
+              onClick={() => {
+                console.log('새로고침 버튼 클릭됨'); // 디버깅용
+                fetchQuote();
+              }}
+              type="button"
+              title="새 명언 보기"
+            >
+              🔄
+            </button>
+          </div>
+        )}
+
+        {/* 검색 바 */}
+        <div className="search-container">
+          <input
+            type="text"
+            className="search-input"
+            placeholder="🔍 과목 이름으로 검색..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+          />
+          {searchQuery && (
+            <button className="clear-search" onClick={() => setSearchQuery('')}>
+              ✕
+            </button>
+          )}
+        </div>
+
         <div className="course-grid">
-          {courses.map((course) => (
+          {filteredCourses.length === 0 ? (
+            <div className="empty-state">
+              <p>{searchQuery ? '검색 결과가 없습니다.' : '등록된 과목이 없습니다.'}</p>
+            </div>
+          ) : (
+            filteredCourses.map((course) => (
             <div key={course.id} className="course-card">
               <div className="course-header">
                 <h2>{course.name}</h2>
@@ -187,7 +259,8 @@ function Home() {
                 </Link>
               </div>
             </div>
-          ))}
+          ))
+          )}
         </div>
 
         {/* 과목 추가/수정 모달 */}

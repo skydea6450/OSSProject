@@ -8,6 +8,7 @@ function ExamList() {
   const [course, setCourse] = useState(null);
   const [exams, setExams] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     fetchCourseAndExams();
@@ -15,8 +16,8 @@ function ExamList() {
 
   const fetchCourseAndExams = async () => {
     try {
-      const courseResponse = await axios.get(`http://localhost:3001/courses/${courseId}`);
-      const examsResponse = await axios.get(`http://localhost:3001/exams?courseId=${courseId}`);
+      const courseResponse = await axios.get(`https://ossdb.onrender.com/courses/${courseId}`);
+      const examsResponse = await axios.get(`https://ossdb.onrender.com/exams?courseId=${courseId}`);
       
       setCourse(courseResponse.data);
       setExams(examsResponse.data);
@@ -30,7 +31,7 @@ function ExamList() {
   const handleDelete = async (examId) => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
-        await axios.delete(`http://localhost:3001/exams/${examId}`);
+        await axios.delete(`https://ossdb.onrender.com/exams/${examId}`);
         setExams(exams.filter(exam => exam.id !== examId));
       } catch (error) {
         console.error('삭제 실패:', error);
@@ -57,6 +58,11 @@ function ExamList() {
     return <div className="loading">로딩 중...</div>;
   }
 
+  // 검색 필터링
+  const filteredExams = exams.filter(exam =>
+    exam.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="exam-container">
       <div className="container">
@@ -70,16 +76,36 @@ function ExamList() {
           </Link>
         </div>
 
+        {/* 검색 */}
+        <div className="filter-container">
+          <div className="search-wrapper">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="🔍 시험 제목으로 검색..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button className="clear-search" onClick={() => setSearchQuery('')}>
+                ✕
+              </button>
+            )}
+          </div>
+        </div>
+
         <div className="exam-list">
-          {exams.length === 0 ? (
+          {filteredExams.length === 0 ? (
             <div className="empty-state">
-              <p>등록된 시험이 없습니다.</p>
-              <Link to={`/course/${courseId}/exam/new`} className="add-button">
-                첫 시험 추가하기
-              </Link>
+              <p>{searchQuery ? '검색 결과가 없습니다.' : '등록된 시험이 없습니다.'}</p>
+              {!searchQuery && (
+                <Link to={`/course/${courseId}/exam/new`} className="add-button">
+                  첫 시험 추가하기
+                </Link>
+              )}
             </div>
           ) : (
-            exams.map((exam) => {
+            filteredExams.map((exam) => {
               const statusBadge = getStatusBadge(exam.status);
               const comingSoon = isComingSoon(exam.examDate);
               

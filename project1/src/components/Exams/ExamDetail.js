@@ -16,8 +16,8 @@ function ExamDetail() {
 
   const fetchExamDetail = async () => {
     try {
-      const examResponse = await axios.get(`http://localhost:3001/exams/${examId}`);
-      const courseResponse = await axios.get(`http://localhost:3001/courses/${courseId}`);
+      const examResponse = await axios.get(`https://ossdb.onrender.com/exams/${examId}`);
+      const courseResponse = await axios.get(`https://ossdb.onrender.com/courses/${courseId}`);
       
       setExam(examResponse.data);
       setCourse(courseResponse.data);
@@ -31,7 +31,7 @@ function ExamDetail() {
   const handleDelete = async () => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
-        await axios.delete(`http://localhost:3001/exams/${examId}`);
+        await axios.delete(`https://ossdb.onrender.com/exams/${examId}`);
         navigate(`/course/${courseId}/exams`);
       } catch (error) {
         console.error('삭제 실패:', error);

@@ -25,7 +25,7 @@ function LessonForm() {
 
   const fetchLesson = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/lessons/${lessonId}`);
+      const response = await axios.get(`https://ossdb.onrender.com/lessons/${lessonId}`);
       setFormData(response.data);
     } catch (error) {
       console.error('강의를 불러오는데 실패했습니다:', error);
@@ -51,9 +51,9 @@ function LessonForm() {
       };
 
       if (isEditMode) {
-        await axios.put(`http://localhost:3001/lessons/${lessonId}`, lessonData);
+        await axios.put(`https://ossdb.onrender.com/lessons/${lessonId}`, lessonData);
       } else {
-        await axios.post('http://localhost:3001/lessons', lessonData);
+        await axios.post('https://ossdb.onrender.com/lessons', lessonData);
       }
       
       navigate(`/course/${courseId}/lessons`);

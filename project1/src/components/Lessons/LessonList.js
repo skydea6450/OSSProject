@@ -8,6 +8,8 @@ function LessonList() {
   const [course, setCourse] = useState(null);
   const [lessons, setLessons] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
+  const [sortOrder, setSortOrder] = useState('asc'); // 'asc' or 'desc'
 
   useEffect(() => {
     fetchCourseAndLessons();
@@ -15,8 +17,8 @@ function LessonList() {
 
   const fetchCourseAndLessons = async () => {
     try {
-      const courseResponse = await axios.get(`http://localhost:3001/courses/${courseId}`);
-      const lessonsResponse = await axios.get(`http://localhost:3001/lessons?courseId=${courseId}`);
+      const courseResponse = await axios.get(`https://ossdb.onrender.com/courses/${courseId}`);
+      const lessonsResponse = await axios.get(`https://ossdb.onrender.com/lessons?courseId=${courseId}`);
       
       setCourse(courseResponse.data);
       setLessons(lessonsResponse.data);
@@ -30,7 +32,7 @@ function LessonList() {
   const handleDelete = async (lessonId) => {
     if (window.confirm('정말 삭제하시겠습니까?')) {
       try {
-        await axios.delete(`http://localhost:3001/lessons/${lessonId}`);
+        await axios.delete(`https://ossdb.onrender.com/lessons/${lessonId}`);
         setLessons(lessons.filter(lesson => lesson.id !== lessonId));
       } catch (error) {
         console.error('삭제 실패:', error);
@@ -51,6 +53,18 @@ function LessonList() {
     return <div className="loading">로딩 중...</div>;
   }
 
+  // 검색 필터링
+  const filteredLessons = lessons.filter(lesson =>
+    lesson.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  // 시간순 정렬
+  const sortedLessons = [...filteredLessons].sort((a, b) => {
+    const dateA = new Date(a.dueDate);
+    const dateB = new Date(b.dueDate);
+    return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+  });
+
   return (
     <div className="lesson-container">
       <div className="container">
@@ -64,16 +78,51 @@ function LessonList() {
           </Link>
         </div>
 
+        {/* 검색 및 필터 */}
+        <div className="filter-container">
+          <div className="search-wrapper">
+            <input
+              type="text"
+              className="search-input"
+              placeholder="🔍 강의 제목으로 검색..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
+            {searchQuery && (
+              <button className="clear-search" onClick={() => setSearchQuery('')}>
+                ✕
+              </button>
+            )}
+          </div>
+          
+          <div className="sort-buttons">
+            <button 
+              className={`sort-btn ${sortOrder === 'asc' ? 'active' : ''}`}
+              onClick={() => setSortOrder('asc')}
+            >
+              📅 오래된 순
+            </button>
+            <button 
+              className={`sort-btn ${sortOrder === 'desc' ? 'active' : ''}`}
+              onClick={() => setSortOrder('desc')}
+            >
+              📅 최신 순
+            </button>
+          </div>
+        </div>
+
         <div className="lesson-list">
-          {lessons.length === 0 ? (
+          {sortedLessons.length === 0 ? (
             <div className="empty-state">
-              <p>등록된 강의가 없습니다.</p>
-              <Link to={`/course/${courseId}/lesson/new`} className="add-button">
-                첫 강의 추가하기
-              </Link>
+              <p>{searchQuery ? '검색 결과가 없습니다.' : '등록된 강의가 없습니다.'}</p>
+              {!searchQuery && (
+                <Link to={`/course/${courseId}/lesson/new`} className="add-button">
+                  첫 강의 추가하기
+                </Link>
+              )}
             </div>
           ) : (
-            lessons.map((lesson) => {
+            sortedLessons.map((lesson) => {
               const statusBadge = getStatusBadge(lesson.status);
               return (
                 <div key={lesson.id} className="lesson-item">

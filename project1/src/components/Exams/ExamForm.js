@@ -29,7 +29,7 @@ function ExamForm() {
 
   const fetchExam = async () => {
     try {
-      const response = await axios.get(`http://localhost:3001/exams/${examId}`);
+      const response = await axios.get(`https://ossdb.onrender.com/exams/${examId}`);
       setFormData({
         ...response.data,
         score: response.data.score !== null ? response.data.score : ''
@@ -60,9 +60,9 @@ function ExamForm() {
       };
 
       if (isEditMode) {
-        await axios.put(`http://localhost:3001/exams/${examId}`, examData);
+        await axios.put(`https://ossdb.onrender.com/exams/${examId}`, examData);
       } else {
-        await axios.post('http://localhost:3001/exams', examData);
+        await axios.post('https://ossdb.onrender.com/exams', examData);
       }
       
       navigate(`/course/${courseId}/exams`);

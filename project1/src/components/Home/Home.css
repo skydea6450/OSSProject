@@ -7,10 +7,14 @@
   padding: 30px;
   border-radius: 15px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  margin-bottom: 30px;
+  margin-bottom: 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+.header-content {
+  flex: 1;
 }
 
 .page-header h1 {
@@ -22,6 +26,111 @@
 .header-info {
   color: #666;
   font-size: 1.1em;
+}
+
+.quote-section {
+  background: white;
+  padding: 25px 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  border-left: 5px solid #667eea;
+  background: linear-gradient(135deg, #667eea08 0%, #764ba208 100%);
+}
+
+.quote-content {
+  flex: 1;
+}
+
+.quote-text {
+  color: #333;
+  font-size: 1.2em;
+  font-style: italic;
+  line-height: 1.8;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.quote-author {
+  color: #667eea;
+  font-size: 1em;
+  font-weight: 600;
+  text-align: right;
+}
+
+.refresh-quote {
+  background: #667eea;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  cursor: pointer;
+  font-size: 1.3em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(102, 126, 234, 0.3);
+}
+
+.refresh-quote:hover {
+  background: #764ba2;
+  transform: rotate(180deg) scale(1.1);
+  box-shadow: 0 6px 15px rgba(102, 126, 234, 0.4);
+}
+
+.refresh-quote:active {
+  transform: rotate(180deg) scale(0.95);
+}
+
+.search-container {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 15px 45px 15px 20px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  font-size: 1.1em;
+  background: white;
+  transition: all 0.3s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #667eea;
+  box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+}
+
+.clear-search {
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #e0e0e0;
+  border: none;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+}
+
+.clear-search:hover {
+  background: #667eea;
+  color: white;
 }
 
 .add-button {
